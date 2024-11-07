@@ -1,0 +1,16 @@
+.header__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.header__navbar {
+    display: flex;
+    gap: 3rem;
+}
+
+.navbar__link {
+    font-size: 20px;
+    cursor: pointer;
+}

@@ -1,0 +1,109 @@
+/* Основные настройки для контейнера страницы */
+.main-page__container {
+    margin-bottom: 4rem;
+}
+
+.main__title {
+    font-size: 48px;
+    font-weight: 600;
+    color: #333;
+    margin: 1rem 0;
+    text-transform: uppercase;
+}
+
+.main-page__blocks-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+}
+
+.blocks__description {
+    max-width: 35%;
+}
+
+.main__description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+.main__span {
+    font-weight: 500;
+}
+
+/* Для текста с именами авторов */
+.name-of-creator {
+    color: #007bff;
+    font-weight: 700;
+}
+
+/* Для стека технологий */
+.choose-technology {
+    color: #007bff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Обновление стилизации картинок авторов */
+.blocks__image {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.creator-image {
+    max-width: 220px;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover-эффект для картинок */
+.creator-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.react-icon {
+    width: 35px;
+    height: 35px;
+    animation: rotate-icon 10s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes rotate-icon {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .main-page__blocks-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .blocks__description {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .main__description {
+        font-size: 18px;
+    }
+
+    .creator-image {
+        width: 150px;
+        height: 150px;
+    }
+}
