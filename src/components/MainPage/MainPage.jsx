@@ -2,7 +2,9 @@ import React from "react";
 import './MainPage.css';
 import nikitaImage from '../../img/nikita-image.jpg';
 import igorImage from '../../img/igor-image.jpg';
+import kolyaImage from '../../img/kolya-image.jpg';
 import reactIcon from '../../img/react-icon.svg';
+
 
 function MainPage(){
     return (
@@ -26,8 +28,8 @@ function MainPage(){
                 </div>
                 <div className="blocks__image">
                     <img className="creator-image" src={nikitaImage} alt="Создатель: Никита"></img>
+                    <img className="creator-image" src={kolyaImage} alt="Создатель: Николай"></img>
                     <img className="creator-image" src={igorImage} alt="Создатель: Игорь"></img>
-                    <img className="creator-image" src={nikitaImage} alt="Создатель: Никита"></img>
                 </div>
             </div>
         </div>

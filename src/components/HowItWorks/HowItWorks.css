@@ -1,0 +1,24 @@
+.how__descr {
+    max-width: 80%;
+    margin-bottom: 4rem;
+}
+
+.step__title, .examples__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.step__list {
+    list-style: decimal;
+    margin: 1rem 0 2rem 1.5rem;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.step__list li {
+    margin-bottom: 1rem;
+}
