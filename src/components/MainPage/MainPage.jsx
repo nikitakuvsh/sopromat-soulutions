@@ -2,7 +2,6 @@ import React from "react";
 import './MainPage.css';
 import nikitaImage from '../../img/nikita-image.jpg';
 import igorImage from '../../img/igor-image.jpg';
-import kolyaImage from '../../img/kolya-image.jpg';
 import reactIcon from '../../img/react-icon.svg';
 
 
@@ -16,7 +15,7 @@ function MainPage(){
                         Данное приложение создавалось с учебно-практической целью для дисциплины Основы механики
                     </p>
                     <p className="main__description">
-                        В создании участвовали: <span className="main__span name-of-creator">Агапов Николай, Кувшинников Никита, Камушкин Игорь</span>
+                        В создании участвовали: <span className="main__span name-of-creator">Кувшинников Никита, Камушкин Игорь</span>
                     </p>
                     <p className="main__description">
                         Выбранный стек:
@@ -28,7 +27,6 @@ function MainPage(){
                 </div>
                 <div className="blocks__image">
                     <img className="creator-image" src={nikitaImage} alt="Создатель: Никита"></img>
-                    <img className="creator-image" src={kolyaImage} alt="Создатель: Николай"></img>
                     <img className="creator-image" src={igorImage} alt="Создатель: Игорь"></img>
                 </div>
             </div>
