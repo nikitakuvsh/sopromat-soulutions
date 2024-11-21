@@ -81,7 +81,10 @@ function Task() {
 
     return (
         <div className="task__container">
-            <h2 className="main__title">Решить задачу</h2>
+            <div className="task__text-container">
+                <h2 className="main__title">Решить задачу</h2>
+                <h3 className="main__type-of-task">Растяжение-сжатие</h3>
+            </div>
             <div className="task__pallete" ref={palleteRef} onClick={handlePalleteClick}>
                 <div className="choose__figure">
                     <ul className="figure__ul">
