@@ -112,25 +112,42 @@ function Task() {
                                     <div className="support__label">Опора ({shape.position === "left" ? "Слева" : "Справа"})</div>
                                 </div>
                             ) : shape.type === "square" ? (
-                                <div key={index} className="draggable__square" style={{ width: shape.sideLength * 2, height: shape.sideLength * 2 }}>
+                                <div
+                                    key={index}
+                                    className="draggable__square"
+                                    style={{ width: shape.sideLength * 2, height: shape.sideLength * 2 }}
+                                >
                                     <div className="square__label">Площадь: A{index} мм²</div>
+                                    <div className="axis-line axis-line--horizontal" />
                                 </div>
                             ) : shape.type === "rectangle" ? (
-                                <div key={index} className="draggable__rectangle" style={{ width: shape.width * 2, height: shape.height * 2 }}>
+                                <div
+                                    key={index}
+                                    className="draggable__rectangle"
+                                    style={{ width: shape.width * 2, height: shape.height * 2 }}
+                                >
                                     <div className="rectangle__label">Площадь: A{index} мм²</div>
+                                    <div className="axis-line axis-line--horizontal" />
                                 </div>
                             ) : shape.type === "force" ? (
-                                <div key={index} className="force" style={{ position: "absolute", left: shape.position.left, top: shape.position.top }}>
+                                <div
+                                    key={index}
+                                    className="force"
+                                    style={{
+                                        position: "absolute",
+                                        left: shape.position.left,
+                                        top: shape.position.top,
+                                    }}
+                                >
                                     <div className="force__label">F{index + 1}</div>
                                     <div
                                         className={`force__arrow ${shape.direction}`}
                                         style={{
                                             position: 'absolute',
-
                                             left: '-930%',
                                             transform: `translate(-50%, -50%) ${shape.direction === 'left' ? 'rotate(180deg)' : ''}`,
-                                            width: '100px',  // Длина стрелки
-                                            height: '5px',   // Толщина стрелки
+                                            width: '100px',
+                                            height: '5px',
                                             backgroundColor: 'black',
                                             borderRadius: '3px',
                                         }}
@@ -139,12 +156,12 @@ function Task() {
                                             className="force__arrow-head"
                                             style={{
                                                 position: 'absolute',
-                                                top: '-0.1rem',  // Позиция наконечника
+                                                top: '-0.1rem',
                                                 width: '1px',
                                                 height: '0',
                                                 borderLeft: '5px solid transparent',
                                                 borderRight: '5px solid transparent',
-                                                borderTop: '10px solid black',  // Наконечник стрелки
+                                                borderTop: '10px solid black',
                                                 left: shape.direction === 'right' ? '100%' : 'auto',
                                                 right: shape.direction === 'left' ? '-10%' : 'auto',
                                                 rotate: shape.direction === 'left' ? '-95deg' : 'auto',
@@ -154,6 +171,7 @@ function Task() {
                                 </div>
                             ) : null
                         ))}
+
                     </div>
                 </Draggable>
                 <button className="send__task" onClick={handleCalculateClick}>Рассчитать</button>

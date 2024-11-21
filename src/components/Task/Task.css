@@ -186,3 +186,31 @@
     border-radius: 3px;
     transform: translate(-50%, -50%);
 }
+
+/* Общий стиль для осевых линий */
+.axis-line {
+    position: absolute;
+    z-index: 10;
+}
+
+/* Горизонтальная линия с паттерном "штрих-точка" */
+.axis-line--horizontal {
+    top: 50%;
+    left: 0;
+    width: 108%;
+    height: 2px; /* Толщина линии */
+    background: repeating-linear-gradient(
+        to right,
+        rgba(65, 64, 64, 0.7) 0,
+        rgba(65, 64, 64, 0.7) 30px,
+        transparent 30px,
+        transparent 35px,
+        rgba(65, 64, 64, 0.7) 35px,
+        rgba(65, 64, 64, 0.7) 36px,
+        transparent 36px,
+        transparent 40px
+    ); /* Шаблон чередования: штрих (10px), пробел (5px), точка (1px), пробел (4px) */
+    transform: translateY(-50%);
+}
+
+
