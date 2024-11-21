@@ -104,74 +104,65 @@ function Task() {
                 <Draggable onDrag={handleDrag} bounds="parent">
                     <div className="draggable__group">
                         {shapes.map((shape, index) => (
-                            shape.type === "support" ? (
-                                <div
-                                    key={index}
-                                    className={`support ${shape.position === "left" ? "support--left" : "support--right"}`}
-                                >
-                                    <div className="support__label">Опора ({shape.position === "left" ? "Слева" : "Справа"})</div>
-                                </div>
-                            ) : shape.type === "square" ? (
-                                <div
-                                    key={index}
-                                    className="draggable__square"
-                                    style={{ width: shape.sideLength * 2, height: shape.sideLength * 2 }}
-                                >
-                                    <div className="square__label">Площадь: A{index} мм²</div>
-                                    <div className="axis-line axis-line--horizontal" />
-                                </div>
-                            ) : shape.type === "rectangle" ? (
-                                <div
-                                    key={index}
-                                    className="draggable__rectangle"
-                                    style={{ width: shape.width * 2, height: shape.height * 2 }}
-                                >
-                                    <div className="rectangle__label">Площадь: A{index} мм²</div>
-                                    <div className="axis-line axis-line--horizontal" />
-                                </div>
-                            ) : shape.type === "force" ? (
-                                <div
-                                    key={index}
-                                    className="force"
-                                    style={{
-                                        position: "absolute",
-                                        left: shape.position.left,
-                                        top: shape.position.top,
-                                    }}
-                                >
-                                    <div className="force__label">F{index + 1}</div>
+                            <div key={index}>
+                                {shape.type === "support" ? (
                                     <div
-                                        className={`force__arrow ${shape.direction}`}
-                                        style={{
-                                            position: 'absolute',
-                                            left: '-930%',
-                                            transform: `translate(-50%, -50%) ${shape.direction === 'left' ? 'rotate(180deg)' : ''}`,
-                                            width: '100px',
-                                            height: '5px',
-                                            backgroundColor: 'black',
-                                            borderRadius: '3px',
-                                        }}
+                                        className={`support ${shape.position === "left" ? "support--left" : "support--right"}`}
                                     >
+                                        <div className="support__label">Опора ({shape.position === "left" ? "Слева" : "Справа"})</div>
                                         <div
-                                            className="force__arrow-head"
+                                            className="support-line"
                                             style={{
-                                                position: 'absolute',
-                                                top: '-0.1rem',
-                                                width: '1px',
-                                                height: '0',
-                                                borderLeft: '5px solid transparent',
-                                                borderRight: '5px solid transparent',
-                                                borderTop: '10px solid black',
-                                                left: shape.direction === 'right' ? '100%' : 'auto',
-                                                right: shape.direction === 'left' ? '-10%' : 'auto',
-                                                rotate: shape.direction === 'left' ? '-95deg' : 'auto',
+                                                position: "absolute",
+                                                left: "95%",
+                                                transform: "translateX(-50%)",
+                                                top: "100%",
+                                                width: "2px",
+                                                height: "12.5%",
+                                                backgroundColor: "gray",
                                             }}
                                         />
                                     </div>
-                                </div>
-                            ) : null
+                                ) : shape.type === "square" || shape.type === "rectangle" ? (
+                                    <div
+                                        className={`draggable__${shape.type}`}
+                                        style={{
+                                            width: shape.type === "square" ? shape.sideLength * 2 : shape.width * 2,
+                                            height: shape.type === "square" ? shape.sideLength * 2 : shape.height * 2,
+                                        }}
+                                    >
+                                        <div className={`${shape.type}__label`}>Площадь: A{index} мм²</div>
+                                        <div className="axis-line axis-line--horizontal" />
+                                        {/* Линии вниз от двух углов фигуры */}
+                                        {shape.type === "square" ? (
+                                            <div
+                                                className="section-line"
+                                                style={{
+                                                    position: "absolute",
+                                                    right: "-1%",
+                                                    top: "100%",
+                                                    width: "2px",
+                                                    height: "75%", // Линия для квадрата
+                                                    backgroundColor: "gray",
+                                                }}
+                                            />
+                                        ) : (
+                                            <div
+                                                className="section-line"
+                                                style={{
+                                                    position: "absolute",
+                                                    right: "-1%",
+                                                    top: "100%",
+                                                    width: "2px",
+                                                    height: "160%", // Увеличенная линия для прямоугольника
+                                                    backgroundColor: "gray",
+                                                }}
+                                            />
+                                        )}
+                                    </div>
+                                ) : null}
+                            </div>
                         ))}
-
                     </div>
                 </Draggable>
                 <button className="send__task" onClick={handleCalculateClick}>Рассчитать</button>
