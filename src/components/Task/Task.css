@@ -240,3 +240,10 @@
     height: 75%;
     background-color: gray    
 }
+
+.section-line__arrow {
+    position: absolute;
+    /* bottom: -85%; */
+    left: 0;
+    display: flex;
+}

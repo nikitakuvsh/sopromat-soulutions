@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import './Task.css';
 import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
+import Arrow from '../../img/Arrow.svg';
 
 function Task() {
     const [shapes, setShapes] = useState([]);
@@ -89,19 +90,45 @@ function Task() {
                                         <div className="axis-line axis-line--horizontal" />
                                         {/* Линии вниз от двух углов фигуры */}
                                         {shape.type === "square" ? (
+                                            <>
                                             <div
                                                 className="section-line"
                                                 style={{
                                                     height: "75%", // Линия для квадрата
                                                 }}
                                             />
+                                            <div className="section-line__arrow" style={{
+                                                bottom: '-78%',
+                                            }}>
+                                                <img className="arrow-image" src={Arrow} style={{
+                                                    width: '6.3rem',
+                                                }}></img>
+                                                <img className="arrow-image" src={Arrow} style={{
+                                                    transform: 'rotate(180deg)',
+                                                    width: '6.3rem',
+                                                }}></img>
+                                            </div>
+                                            </>
                                         ) : (
+                                            <>
                                             <div
                                                 className="section-line"
                                                 style={{
                                                     height: "160%", // Увеличенная линия для прямоугольника
                                                 }}
                                             />
+                                            <div className="section-line__arrow" style={{
+                                                bottom: '-165%',
+                                            }}>
+                                                <img className="arrow-image" src={Arrow} style={{
+                                                    width: '7.5rem',
+                                                }}></img>
+                                                <img className="arrow-image" src={Arrow} style={{
+                                                    transform: 'rotate(180deg)',
+                                                    width: '7.5rem',
+                                                }}></img>
+                                            </div>
+                                            </>
                                         )}
                                     </div>
                                 ) : null}
