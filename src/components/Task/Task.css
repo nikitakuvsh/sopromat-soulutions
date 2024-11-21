@@ -213,12 +213,30 @@
     transform: translateY(-50%);
 }
 
-.support-line,
-.section-line {
+
+/* .section-line {
     position: absolute;
-    top: 100%; /* Линия начинается сразу под фигурой */
+    top: 100%;
     width: 1px;
-    height: 50px; /* Общая высота для всех */
+    height: 50px;
+    background-color: gray;
+} */
+
+.support-line {
+    position: absolute;
+    left: 95%;
+    transform: translateX(-50%);
+    top: 100%;
+    width: 2px;
+    height: 12.5%;
     background-color: gray;
 }
 
+.section-line {
+    position: absolute;
+    right: -1%;
+    top: 100%;
+    width: 2px;
+    height: 75%;
+    background-color: gray    
+}

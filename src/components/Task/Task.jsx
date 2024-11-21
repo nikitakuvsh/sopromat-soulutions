@@ -6,7 +6,6 @@ import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
 function Task() {
     const [shapes, setShapes] = useState([]);
     const [isSupportModalOpen, setSupportModalOpen] = useState(false);
-    const [isForceModalOpen, setForceModalOpen] = useState(false);
     const [supportPosition, setSupportPosition] = useState(null);
     const [forceDirection, setForceDirection] = useState(null);
     const [forcePosition, setForcePosition] = useState(null);
@@ -37,47 +36,13 @@ function Task() {
         setSupportModalOpen(true);
     };
 
-    const openForceModal = (position) => {
-        setForcePosition(position);
-        setIsSelectingForce(true);
-    };
-
     const handlePalleteClick = (e) => {
         if (isSelectingForce) {
             const rect = palleteRef.current.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = (e.clientY - rect.top) / 2;
             setForcePosition({ left: x, top: y });
-            setForceModalOpen(true);
             setIsSelectingForce(false);
-        }
-    };
-
-    const addForce = () => {
-        if (forceDirection) {
-            setShapes([
-                ...shapes,
-                { type: "force", direction: forceDirection, position: forcePosition }
-            ]);
-            setForceModalOpen(false);
-        }
-    };
-
-    const handleDrag = (e, data) => {
-        const paletteBounds = palleteRef.current.getBoundingClientRect();
-        const itemBounds = data.node.getBoundingClientRect();
-
-        if (itemBounds.left < paletteBounds.left) {
-            data.x = paletteBounds.left - paletteBounds.left;
-        }
-        if (itemBounds.top < paletteBounds.top) {
-            data.y = paletteBounds.top - paletteBounds.top;
-        }
-        if (itemBounds.right > paletteBounds.right) {
-            data.x = paletteBounds.right - itemBounds.width;
-        }
-        if (itemBounds.bottom > paletteBounds.bottom) {
-            data.y = paletteBounds.bottom - itemBounds.height;
         }
     };
 
@@ -101,7 +66,7 @@ function Task() {
                     </ul>
                 </div>
 
-                <Draggable onDrag={handleDrag} bounds="parent">
+                <Draggable bounds="parent">
                     <div className="draggable__group">
                         {shapes.map((shape, index) => (
                             <div key={index}>
@@ -110,18 +75,7 @@ function Task() {
                                         className={`support ${shape.position === "left" ? "support--left" : "support--right"}`}
                                     >
                                         <div className="support__label">Опора ({shape.position === "left" ? "Слева" : "Справа"})</div>
-                                        <div
-                                            className="support-line"
-                                            style={{
-                                                position: "absolute",
-                                                left: "95%",
-                                                transform: "translateX(-50%)",
-                                                top: "100%",
-                                                width: "2px",
-                                                height: "12.5%",
-                                                backgroundColor: "gray",
-                                            }}
-                                        />
+                                        <div className="support-line"></div>
                                     </div>
                                 ) : shape.type === "square" || shape.type === "rectangle" ? (
                                     <div
@@ -138,24 +92,14 @@ function Task() {
                                             <div
                                                 className="section-line"
                                                 style={{
-                                                    position: "absolute",
-                                                    right: "-1%",
-                                                    top: "100%",
-                                                    width: "2px",
                                                     height: "75%", // Линия для квадрата
-                                                    backgroundColor: "gray",
                                                 }}
                                             />
                                         ) : (
                                             <div
                                                 className="section-line"
                                                 style={{
-                                                    position: "absolute",
-                                                    right: "-1%",
-                                                    top: "100%",
-                                                    width: "2px",
                                                     height: "160%", // Увеличенная линия для прямоугольника
-                                                    backgroundColor: "gray",
                                                 }}
                                             />
                                         )}
@@ -175,17 +119,6 @@ function Task() {
                         <button onClick={() => addSupport("left")}>Слева</button>
                         <button onClick={() => addSupport("right")}>Справа</button>
                         <button onClick={() => setSupportModalOpen(false)}>Отмена</button>
-                    </div>
-                </div>
-            )}
-
-            {isForceModalOpen && (
-                <div className="modal">
-                    <div className="modal__content">
-                        <h3>Выберите направление силы</h3>
-                        <button onClick={() => { setForceDirection("left"); addForce(); }}>Влево</button>
-                        <button onClick={() => { setForceDirection("right"); addForce(); }}>Вправо</button>
-                        <button onClick={() => setForceModalOpen(false)}>Отмена</button>
                     </div>
                 </div>
             )}
