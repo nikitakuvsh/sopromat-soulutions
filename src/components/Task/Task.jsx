@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import './Task.css';
+import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
 
 function Task() {
     const [shapes, setShapes] = useState([]);
@@ -10,6 +11,7 @@ function Task() {
     const [forceDirection, setForceDirection] = useState(null);
     const [forcePosition, setForcePosition] = useState(null);
     const [isSelectingForce, setIsSelectingForce] = useState(false);
+    const [isModalInfoOpen, setModalInfoOpen] = useState(false);
     const palleteRef = useRef(null);
 
     const addSquare = () => {
@@ -44,7 +46,7 @@ function Task() {
         if (isSelectingForce) {
             const rect = palleteRef.current.getBoundingClientRect();
             const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const y = (e.clientY - rect.top) / 2;
             setForcePosition({ left: x, top: y });
             setForceModalOpen(true);
             setIsSelectingForce(false);
@@ -78,6 +80,10 @@ function Task() {
             data.y = paletteBounds.bottom - itemBounds.height;
         }
     };
+
+    const handleCalculateClick = () => {
+        setModalInfoOpen(true);
+    }
 
     return (
         <div className="task__container">
@@ -121,7 +127,7 @@ function Task() {
                                         style={{
                                             position: 'absolute',
 
-                                            left: '-650%',
+                                            left: '-930%',
                                             transform: `translate(-50%, -50%) ${shape.direction === 'left' ? 'rotate(180deg)' : ''}`,
                                             width: '100px',  // Длина стрелки
                                             height: '5px',   // Толщина стрелки
@@ -139,7 +145,7 @@ function Task() {
                                                 borderLeft: '5px solid transparent',
                                                 borderRight: '5px solid transparent',
                                                 borderTop: '10px solid black',  // Наконечник стрелки
-                                                left: shape.direction === 'right' ? '750%' : 'auto',
+                                                left: shape.direction === 'right' ? '100%' : 'auto',
                                                 right: shape.direction === 'left' ? '-10%' : 'auto',
                                                 rotate: shape.direction === 'left' ? '-95deg' : 'auto',
                                             }}
@@ -150,7 +156,7 @@ function Task() {
                         ))}
                     </div>
                 </Draggable>
-                <button className="send__task">Рассчитать</button>
+                <button className="send__task" onClick={handleCalculateClick}>Рассчитать</button>
             </div>
 
             {isSupportModalOpen && (
@@ -173,6 +179,13 @@ function Task() {
                         <button onClick={() => setForceModalOpen(false)}>Отмена</button>
                     </div>
                 </div>
+            )}
+
+            {isModalInfoOpen && (
+                <ModalInfoTask
+                    shapes={shapes}
+                    onClose={() => setModalInfoOpen(false)}
+                />
             )}
         </div>
     );

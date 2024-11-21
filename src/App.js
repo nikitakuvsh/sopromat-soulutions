@@ -5,6 +5,7 @@ import Footer from '../src/components/layouts/Footer/Footer';
 import MainPage from './components/MainPage/MainPage';
 import HowItWorks from './components/HowItWorks/HowItWorks';
 import Task from './components/Task/Task';
+import ModalInfoTask from './components/ModalInfoTask/ModalInfoTask';
 
 function App() {
   return (

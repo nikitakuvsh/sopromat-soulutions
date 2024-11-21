@@ -1,0 +1,90 @@
+/* Блок для модального окна */
+.modal-info-task {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Контейнер содержимого */
+.modal-info-task__content {
+    background-color: #ffffff; /* Белый фон */
+    border-radius: 16px; /* Закругленные углы */
+    padding: 24px 32px; /* Внутренние отступы */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Тень для объема */
+    max-width: 600px; /* Максимальная ширина */
+    width: 30%;
+    font-family: "Arial", sans-serif; /* Универсальный шрифт */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Заголовок модального окна */
+.modal-info-task__title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333; /* Темно-серый текст */
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Список переменных */
+.modal-info-task__list {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 0;
+}
+
+.modal-info-task__list-item {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #555; /* Средний серый */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Поле ввода */
+.modal-info-task__input {
+    padding: 8px;
+    border: 1px solid #ccc; /* Светло-серая рамка */
+    border-radius: 8px;
+    width: 85%; /* Умеренная ширина */
+    font-size: 14px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+/* Кнопка закрытия */
+.modal-info-task__button {
+    background-color: #4CAF50; /* Зеленый цвет */
+    color: #fff; /* Белый текст */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 16px;
+    display: block;
+    width: 100%;
+}
+
+.modal-info-task__button:hover {
+    background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
