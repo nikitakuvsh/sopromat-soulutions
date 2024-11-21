@@ -113,11 +113,11 @@ function Task() {
                                 </div>
                             ) : shape.type === "square" ? (
                                 <div key={index} className="draggable__square" style={{ width: shape.sideLength * 2, height: shape.sideLength * 2 }}>
-                                    <div className="square__label">Площадь: A{index + 1} мм²</div>
+                                    <div className="square__label">Площадь: A{index} мм²</div>
                                 </div>
                             ) : shape.type === "rectangle" ? (
                                 <div key={index} className="draggable__rectangle" style={{ width: shape.width * 2, height: shape.height * 2 }}>
-                                    <div className="rectangle__label">Площадь: A{index + 1} мм²</div>
+                                    <div className="rectangle__label">Площадь: A{index} мм²</div>
                                 </div>
                             ) : shape.type === "force" ? (
                                 <div key={index} className="force" style={{ position: "absolute", left: shape.position.left, top: shape.position.top }}>

@@ -22,7 +22,7 @@ function ModalInfoTask({ shapes, onClose }) {
                         <li className="modal-info-task__list-item" key={index}>
                             {shape.type === "square" && (
                                 <>
-                                    A{index + 1}: 
+                                    A{index}: 
                                     <input
                                         className="modal-info-task__input"
                                         type="number"
@@ -32,7 +32,7 @@ function ModalInfoTask({ shapes, onClose }) {
                             )}
                             {shape.type === "rectangle" && (
                                 <>
-                                    A{index + 1}:
+                                    A{index}:
                                     <input
                                         className="modal-info-task__input"
                                         type="number"
@@ -42,7 +42,7 @@ function ModalInfoTask({ shapes, onClose }) {
                             )}
                             {shape.type === "force" && (
                                 <>
-                                    Сила F{index + 1}: Направление {shape.direction}
+                                    Сила F{index}: Направление {shape.direction}
                                     <input
                                         className="modal-info-task__input"
                                         type="number"
@@ -53,8 +53,8 @@ function ModalInfoTask({ shapes, onClose }) {
                         </li>
                     ))}
                 </ul>
-                <button className="modal-info-task__button">Решить</button>
-                <button className="modal-info-task__button" onClick={onClose}>Закрыть</button>
+                <button className="modal-info-task__button make--solution">Решить</button>
+                <button className="modal-info-task__button do--close" onClick={onClose}>Закрыть</button>
             </div>
         </div>
     );

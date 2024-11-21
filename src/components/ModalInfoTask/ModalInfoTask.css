@@ -65,18 +65,27 @@
     background-color: #4CAF50; /* Зеленый цвет */
     color: #fff; /* Белый текст */
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 12px 24px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    margin-top: 16px;
+    margin-bottom: 0.5rem;
     display: block;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto 0.3rem auto;
+}
+
+.do--close {
+    background-color: crimson;
 }
 
 .modal-info-task__button:hover {
     background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
+.do--close:hover {
+    background-color: brown;
 }
 
 /* Обёртка для входного поля E */
