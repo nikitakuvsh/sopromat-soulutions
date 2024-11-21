@@ -109,6 +109,16 @@
     top: -20px;
 }
 
+.length__span {
+    font-size: 12px;
+    color: #333;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+}
+
+.length__span--ff {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 /* Стили для опоры */
 .support {
     width: 10px;
@@ -246,4 +256,8 @@
     /* bottom: -85%; */
     left: 0;
     display: flex;
+}
+
+.section-line__arrow-text {
+    position: absolute;
 }

@@ -86,7 +86,7 @@ function Task() {
                                             height: shape.type === "square" ? shape.sideLength * 2 : shape.height * 2,
                                         }}
                                     >
-                                        <div className={`${shape.type}__label`}>Площадь: A{index} мм²</div>
+                                        <div className={`${shape.type}__label`}>Площадь: A{index} cм²</div>
                                         <div className="axis-line axis-line--horizontal" />
                                         {/* Линии вниз от двух углов фигуры */}
                                         {shape.type === "square" ? (
@@ -97,14 +97,17 @@ function Task() {
                                                     height: "75%", // Линия для квадрата
                                                 }}
                                             />
+                                            <div className="section-line__arrow-text" style={{bottom: '-70%'}}>
+                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
+                                            </div>
                                             <div className="section-line__arrow" style={{
                                                 bottom: '-78%',
                                             }}>
                                                 <img className="arrow-image" src={Arrow} style={{
                                                     width: '6.3rem',
+                                                    transform: 'rotate(180deg)',
                                                 }}></img>
                                                 <img className="arrow-image" src={Arrow} style={{
-                                                    transform: 'rotate(180deg)',
                                                     width: '6.3rem',
                                                 }}></img>
                                             </div>
@@ -117,14 +120,17 @@ function Task() {
                                                     height: "160%", // Увеличенная линия для прямоугольника
                                                 }}
                                             />
+                                            <div className="section-line__arrow-text" style={{bottom: '-150%'}}>
+                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
+                                            </div>
                                             <div className="section-line__arrow" style={{
                                                 bottom: '-165%',
                                             }}>
                                                 <img className="arrow-image" src={Arrow} style={{
                                                     width: '7.5rem',
+                                                    transform: 'rotate(180deg)',
                                                 }}></img>
                                                 <img className="arrow-image" src={Arrow} style={{
-                                                    transform: 'rotate(180deg)',
                                                     width: '7.5rem',
                                                 }}></img>
                                             </div>
