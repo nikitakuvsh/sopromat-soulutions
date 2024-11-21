@@ -79,6 +79,21 @@
     background-color: #45a049; /* Более темный зеленый при наведении */
 }
 
+/* Обёртка для входного поля E */
+.modal-info-task__input-wrapper {
+    text-align: left;
+}
+
+/* Метка для поля ввода */
+.modal-info-task__label {
+    font-size: 16px;
+    color: #555; /* Цвет текста */
+    display: flex;
+    align-items: center;
+    margin-left: 0.38rem;
+    width: 100%;
+}
+
 /* Анимация появления */
 @keyframes fadeIn {
     from {
