@@ -88,7 +88,7 @@ function Task() {
                                     >
                                         <div className={`${shape.type}__label`}>Площадь: A{index} cм²</div>
                                         <div className="axis-line axis-line--horizontal" />
-                                        {/* Линии вниз от двух углов фигуры */}
+                                        {/* Линии вниз от двух углов фигур */}
                                         {shape.type === "square" ? (
                                             <>
                                             <div
