@@ -12,7 +12,11 @@
 }
 
 .modal-solution__content {
-    background: white;
+    /* background: transparent; */
+    background-image: url('../../img/tetradnyi-list-8-1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    object-fit: cover;
     border-radius: 8px;
     padding: 20px;
     max-width: 600px;
@@ -21,7 +25,7 @@
 }
 
 .modal-solution__title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -46,4 +50,24 @@
 
 .modal-solution__button:hover {
     background: #0056b3;
+}
+
+.modal-solution__task-title,
+.modal-solution__task-calc {
+    font-size: 2rem;
+    font-family: 'calcFamily';
+    margin: 0.2rem;
+}
+
+.modal-solution__task-title {
+    margin-left: 2rem;
+    font-size: 3rem;
+}
+
+.modal-solution__task-calc {
+    margin-left: 5rem;
+}
+
+.modal-solution__task-calc--index {
+    font-size: 1rem;
 }

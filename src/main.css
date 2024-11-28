@@ -17,3 +17,10 @@ html,body {
     flex: 1;
     margin: 0 5%;
 }
+
+@font-face {
+    font-family: 'calcFamily';
+    src: url('./fonts/ALSFinlandiaScript.otf') format('opentype');
+    font-size: normal;
+    font-weight: normal;
+}
