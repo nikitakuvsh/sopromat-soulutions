@@ -261,3 +261,10 @@
 .section-line__arrow-text {
     position: absolute;
 }
+
+.figure--wait:hover {
+    scale: 1.02;
+}
+
+.arrow-force-image {
+}

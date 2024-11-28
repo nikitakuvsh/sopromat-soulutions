@@ -4,6 +4,7 @@ import './Task.css';
 import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
 import Arrow from '../../img/Arrow.svg';
 import ModalSolution from "../ModalSolution/ModalSolution";
+import ForceModal from "../ForceModal/ForceModal";
 
 function Task({handleSolve, collectInputData, taskData}) {
     const [shapes, setShapes] = useState([]);
@@ -16,19 +17,25 @@ function Task({handleSolve, collectInputData, taskData}) {
     const palleteRef = useRef(null);
     const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
     const [haveSolution, setHaveSolution] = useState(false);
-    
+    const [forceWait, setForceWait] = useState(false);
+    const [forceModalopen, setForceModalOpen] = useState(false);
+    const [arrows, setArrows] = useState({});
+    const [selectedFigureId, setSelectedFigureId] = useState(null);
+
 
     const addSquare = () => {
         const sideLength = 100;
         const area = sideLength ** 2;
-        setShapes([...shapes, { type: "square", sideLength, area }]);
+        const id = Date.now();
+        setShapes([...shapes, { id, type: "square", sideLength, area }]);
     };
 
     const addRectangle = () => {
         const width = 120;
         const height = 60;
         const area = width * height;
-        setShapes([...shapes, { type: "rectangle", width, height, area }]);
+        const id = Date.now();
+        setShapes([...shapes, { id, type: "rectangle", width, height, area }]);
     };
 
     const addSupport = (position) => {
@@ -63,6 +70,37 @@ function Task({handleSolve, collectInputData, taskData}) {
         setSolutionModalOpen(false);
     }
 
+    const handleClickWaitForces = (id) => {
+        if (forceWait) {
+            setForceModalOpen(true);
+            setSelectedFigureId(id);
+        }
+    };
+    
+
+    const handlePositionSelect = (position) => {
+        console.log(`Сила размещена: ${position}`);
+        setArrows((prevArrows) => ({
+            ...prevArrows,
+            [selectedFigureId]: [...(prevArrows[selectedFigureId] || []), position], // Добавляем новую стрелочку к выбранной фигуре
+        }));
+        setForceWait(false);
+        setForceModalOpen(false);
+    };
+
+    const getArrowPositionStyle = (position) => {
+        switch (position) {
+            case 'left':
+                return { left: '0', top: '52%', transform: 'translateY(-50%)' };
+            case 'center':
+                return { left: '50%', top: '45%', transform: 'translateX(-50%)' };
+            case 'right':
+                return { right: '-6.3rem', top: '52%', transform: 'translateY(-50%)' };
+            default:
+                return {};
+        }
+    };
+
     return (
         <div className="task__container">
             <div className="task__text-container">
@@ -75,7 +113,7 @@ function Task({handleSolve, collectInputData, taskData}) {
                         <li className="figure__li" onClick={addSquare}>Квадрат</li>
                         <li className="figure__li" onClick={addRectangle}>Прямоугольник</li>
                         <li className="figure__li" onClick={openSupportModal}>Опора</li>
-                        <li className="figure__li" onClick={() => setIsSelectingForce(true)}>Поставить силу</li>
+                        <li className="figure__li" onClick={() => setForceWait(true)}>Поставить силу</li>
                     </ul>
                 </div>
 
@@ -92,12 +130,25 @@ function Task({handleSolve, collectInputData, taskData}) {
                                     </div>
                                 ) : shape.type === "square" || shape.type === "rectangle" ? (
                                     <div
-                                        className={`draggable__${shape.type}`}
+                                        className={`draggable__${shape.type} ${forceWait ? 'figure--wait' : ''}`}
                                         style={{
                                             width: shape.type === "square" ? shape.sideLength * 2 : shape.width * 2,
                                             height: shape.type === "square" ? shape.sideLength * 2 : shape.height * 2,
                                         }}
+                                        onClick={() => handleClickWaitForces(shape.id)} // Передача id
                                     >
+                                        {arrows[shape.id]?.map((position, index) => (
+                                            <div
+                                                key={index}
+                                                className="arrow"
+                                                style={{
+                                                    position: 'absolute',
+                                                    ...getArrowPositionStyle(position),
+                                                }}
+                                            >
+                                                <img className='arrow-force-image' src={Arrow} alt="arrow" />
+                                            </div>
+                                        ))}
                                         <div className={`${shape.type}__label`}>Площадь: A{index} cм²</div>
                                         <div className="axis-line axis-line--horizontal" />
                                         {/* Линии вниз от двух углов фигуры */}
@@ -187,6 +238,12 @@ function Task({handleSolve, collectInputData, taskData}) {
             {isSolutionModalOpen && (
                 <ModalSolution data={taskData} onClose={handleCloseSolution} index={shapes.length - 1} />
             )}
+
+            <ForceModal
+                isOpen={forceModalopen}
+                onClose={() => setForceModalOpen(false)}
+                onSelectPosition={handlePositionSelect}
+            />
         </div>
     );
 }
