@@ -21,7 +21,7 @@ function Task({handleSolve, collectInputData, taskData}) {
     const [forceModalopen, setForceModalOpen] = useState(false);
     const [arrows, setArrows] = useState({});
     const [selectedFigureId, setSelectedFigureId] = useState(null);
-
+    const [forceIndex, setForceIndex] = useState(1);
 
     const addSquare = () => {
         const sideLength = 100;
@@ -77,12 +77,15 @@ function Task({handleSolve, collectInputData, taskData}) {
         }
     };
     
-
     const handlePositionSelect = (position) => {
         setArrows((prevArrows) => ({
             ...prevArrows,
             [selectedFigureId]: [...(prevArrows[selectedFigureId] || []), position], // Добавляем новую стрелочку к выбранной фигуре
         }));
+
+        // Увеличиваем глобальный счётчик для следующей силы
+        setForceIndex(prevIndex => prevIndex + 1);
+
         setForceWait(false);
         setForceModalOpen(false);
     };
@@ -145,7 +148,7 @@ function Task({handleSolve, collectInputData, taskData}) {
                                                     ...getArrowPositionStyle(position),
                                                 }}
                                             >
-                                                <span className='force__span'>F{index}</span>
+                                                <span className='force__span'>F{forceIndex}</span>
                                                 <img className='arrow-force-image' src={Arrow} alt="arrow" />
                                             </div>
                                         ))}
