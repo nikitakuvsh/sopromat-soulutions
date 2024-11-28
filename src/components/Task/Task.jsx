@@ -185,7 +185,7 @@ function Task({handleSolve, collectInputData, taskData}) {
             )}
 
             {isSolutionModalOpen && (
-                <ModalSolution data={taskData} onClose={handleCloseSolution} />
+                <ModalSolution data={taskData} onClose={handleCloseSolution} index={shapes.length - 1} />
             )}
         </div>
     );
