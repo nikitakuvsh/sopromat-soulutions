@@ -79,7 +79,6 @@ function Task({handleSolve, collectInputData, taskData}) {
     
 
     const handlePositionSelect = (position) => {
-        console.log(`Сила размещена: ${position}`);
         setArrows((prevArrows) => ({
             ...prevArrows,
             [selectedFigureId]: [...(prevArrows[selectedFigureId] || []), position], // Добавляем новую стрелочку к выбранной фигуре
@@ -93,7 +92,7 @@ function Task({handleSolve, collectInputData, taskData}) {
             case 'left':
                 return { left: '0', top: '52%', transform: 'translateY(-50%)' };
             case 'center':
-                return { left: '50%', top: '45%', transform: 'translateX(-50%)' };
+                return { left: '9rem', top: '45%', transform: 'translateX(-50%)' };
             case 'right':
                 return { right: '-6.3rem', top: '52%', transform: 'translateY(-50%)' };
             default:
@@ -137,15 +136,16 @@ function Task({handleSolve, collectInputData, taskData}) {
                                         }}
                                         onClick={() => handleClickWaitForces(shape.id)} // Передача id
                                     >
-                                        {arrows[shape.id]?.map((position, index) => (
+                                        {arrows[shape.id]?.map((position, forceIndex) => (
                                             <div
-                                                key={index}
+                                                key={forceIndex}
                                                 className="arrow"
                                                 style={{
                                                     position: 'absolute',
                                                     ...getArrowPositionStyle(position),
                                                 }}
                                             >
+                                                <span className='force__span'>F{index}</span>
                                                 <img className='arrow-force-image' src={Arrow} alt="arrow" />
                                             </div>
                                         ))}

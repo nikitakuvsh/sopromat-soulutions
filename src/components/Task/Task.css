@@ -266,5 +266,10 @@
     scale: 1.02;
 }
 
-.arrow-force-image {
+.force__span {
+    font-size: 12px;
+    color: #333;
+    position: absolute;
+    left: 41%;
+    top: -50%;
 }
