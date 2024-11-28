@@ -1,7 +1,18 @@
 import React from "react";
 import "./ModalInfoTask.css";
 
-function ModalInfoTask({ shapes, onClose }) {
+function ModalInfoTask({ shapes, onClose, openSolution }) {
+
+    function collectInputData() {
+        const inputs = document.querySelectorAll(".modal-info-task__input");
+        const values = Array.from(inputs).map((input) => ({
+            name: input.placeholder,
+            value: input.value,
+        }));
+        return values;
+    }
+    
+
     return (
         <div className="modal-info-task">
             <div className="modal-info-task__content">
@@ -79,7 +90,7 @@ function ModalInfoTask({ shapes, onClose }) {
                     ))}
                     </div>
                 </ul>
-                <button className="modal-info-task__button make--solution">Решить</button>
+                <button className="modal-info-task__button make--solution" onClick={openSolution}>Решить</button>
                 <button className="modal-info-task__button do--close" onClick={onClose}>Закрыть</button>
             </div>
         </div>

@@ -3,8 +3,9 @@ import Draggable from "react-draggable";
 import './Task.css';
 import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
 import Arrow from '../../img/Arrow.svg';
+import ModalSolution from "../ModalSolution/ModalSolution";
 
-function Task() {
+function Task({handleSolve, collectInputData, taskData}) {
     const [shapes, setShapes] = useState([]);
     const [isSupportModalOpen, setSupportModalOpen] = useState(false);
     const [supportPosition, setSupportPosition] = useState(null);
@@ -13,6 +14,9 @@ function Task() {
     const [isSelectingForce, setIsSelectingForce] = useState(false);
     const [isModalInfoOpen, setModalInfoOpen] = useState(false);
     const palleteRef = useRef(null);
+    const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
+    const [haveSolution, setHaveSolution] = useState(false);
+    
 
     const addSquare = () => {
         const sideLength = 100;
@@ -49,6 +53,14 @@ function Task() {
 
     const handleCalculateClick = () => {
         setModalInfoOpen(true);
+    }
+
+    const handleSolutionClick = () => {
+        setSolutionModalOpen(true);
+    }
+
+    const handleCloseSolution = () => {
+        setSolutionModalOpen(false);
     }
 
     return (
@@ -142,6 +154,9 @@ function Task() {
                         ))}
                     </div>
                 </Draggable>
+                {haveSolution && (
+                    <button className="send__task" onClick={handleSolutionClick}></button>
+                )}
                 <button className="send__task" onClick={handleCalculateClick}>Рассчитать</button>
             </div>
 
@@ -160,7 +175,17 @@ function Task() {
                 <ModalInfoTask
                     shapes={shapes}
                     onClose={() => setModalInfoOpen(false)}
+                    openSolution = {() => {
+                        setModalInfoOpen(false);
+                        setSolutionModalOpen(true);
+                        handleSolve();
+                        setHaveSolution(true);
+                    }}
                 />
+            )}
+
+            {isSolutionModalOpen && (
+                <ModalSolution data={taskData} onClose={handleCloseSolution} />
             )}
         </div>
     );
