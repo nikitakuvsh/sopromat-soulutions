@@ -121,7 +121,7 @@ function Task({ handleSolve, collectInputData, taskData }) {
             case 'left':
                 return { left: '0', top: '52%', transform: 'translateY(-50%)' };
             case 'center':
-                return { left: '11rem', top: '45%', transform: 'translateX(-50%)' };
+                return { left: '11rem', top: '43%', transform: 'translateX(-50%)' };
             case 'right':
                 return { right: '-6.3rem', top: '52%', transform: 'translateY(-50%)' };
             default:
@@ -202,13 +202,13 @@ function Task({ handleSolve, collectInputData, taskData }) {
                                                             <div
                                                                 className="section-line"
                                                                 style={{
-                                                                    height: "1220%", // Увеличенная линия для прямоугольника
+                                                                    height: "1223%", // Увеличенная линия для прямоугольника
                                                                     right: '104%',
                                                                     top: '45%',
                                                                 }}
                                                             />
                                                             <div className="section-line__arrow" style={{
-                                                                top: '1220%',
+                                                                top: '1235%',
                                                                 left: '-7.8rem',
                                                             }}>
                                                                 <img className="arrow-image" src={Arrow} style={{
