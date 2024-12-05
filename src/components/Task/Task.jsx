@@ -121,7 +121,7 @@ function Task({ handleSolve, collectInputData, taskData }) {
             case 'left':
                 return { left: '0', top: '52%', transform: 'translateY(-50%)' };
             case 'center':
-                return { left: '9rem', top: '45%', transform: 'translateX(-50%)' };
+                return { left: '11rem', top: '45%', transform: 'translateX(-50%)' };
             case 'right':
                 return { right: '-6.3rem', top: '52%', transform: 'translateY(-50%)' };
             default:
@@ -203,16 +203,13 @@ function Task({ handleSolve, collectInputData, taskData }) {
                                                                 className="section-line"
                                                                 style={{
                                                                     height: "1220%", // Увеличенная линия для прямоугольника
-                                                                    right: '50%',
+                                                                    right: '104%',
                                                                     top: '45%',
                                                                 }}
                                                             />
-                                                            <div className="section-line__arrow-text" style={{ bottom: '-150%' }}>
-                                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
-                                                            </div>
                                                             <div className="section-line__arrow" style={{
                                                                 top: '1220%',
-                                                                left: '-5.8rem',
+                                                                left: '-7.8rem',
                                                             }}>
                                                                 <img className="arrow-image" src={Arrow} style={{
                                                                     width: '7.5rem',
