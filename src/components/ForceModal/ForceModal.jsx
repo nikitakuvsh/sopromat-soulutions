@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ForceModal.css';
 
-function ForceModal({ isOpen, onClose, onSelectPosition }) {
+function ForceModal({ isOpen, onClose, onSelectPosition, onSelectDirection }) {
     if (!isOpen) return null;
 
     const handlePositionSelect = (position) => {

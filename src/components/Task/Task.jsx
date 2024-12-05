@@ -16,12 +16,12 @@ function Task({handleSolve, collectInputData, taskData}) {
     const [isModalInfoOpen, setModalInfoOpen] = useState(false);
     const palleteRef = useRef(null);
     const [isSolutionModalOpen, setSolutionModalOpen] = useState(false);
-    const [haveSolution, setHaveSolution] = useState(false);
     const [forceWait, setForceWait] = useState(false);
     const [forceModalopen, setForceModalOpen] = useState(false);
     const [arrows, setArrows] = useState({});
     const [selectedFigureId, setSelectedFigureId] = useState(null);
     const [forceIndex, setForceIndex] = useState(1);
+    const [visibleSolutionButton, setVisibleSolutionButton] = useState(false);
 
     const addSquare = () => {
         const sideLength = 100;
@@ -64,10 +64,12 @@ function Task({handleSolve, collectInputData, taskData}) {
 
     const handleSolutionClick = () => {
         setSolutionModalOpen(true);
+        setVisibleSolutionButton(true);
     }
 
     const handleCloseSolution = () => {
         setSolutionModalOpen(false);
+        setVisibleSolutionButton(true);
     }
 
     const handleClickWaitForces = (id) => {
@@ -88,6 +90,10 @@ function Task({handleSolve, collectInputData, taskData}) {
 
         setForceWait(false);
         setForceModalOpen(false);
+    };
+
+    const handleDirectionSelect = () => {
+        
     };
 
     const getArrowPositionStyle = (position) => {
@@ -208,8 +214,8 @@ function Task({handleSolve, collectInputData, taskData}) {
                         ))}
                     </div>
                 </Draggable>
-                {haveSolution && (
-                    <button className="send__task" onClick={handleSolutionClick}></button>
+                {visibleSolutionButton && (
+                    <button className="send__task send__task--fix" onClick={() => setSolutionModalOpen(true)}>Посмотреть расчёты</button>
                 )}
                 <button className="send__task" onClick={handleCalculateClick}>Рассчитать</button>
             </div>
@@ -233,7 +239,6 @@ function Task({handleSolve, collectInputData, taskData}) {
                         setModalInfoOpen(false);
                         setSolutionModalOpen(true);
                         handleSolve();
-                        setHaveSolution(true);
                     }}
                 />
             )}
@@ -246,6 +251,7 @@ function Task({handleSolve, collectInputData, taskData}) {
                 isOpen={forceModalopen}
                 onClose={() => setForceModalOpen(false)}
                 onSelectPosition={handlePositionSelect}
+                onSelectDirection={handleDirectionSelect}
             />
         </div>
     );

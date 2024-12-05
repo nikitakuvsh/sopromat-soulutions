@@ -1,5 +1,6 @@
 import React from "react";
 import "./ModalSolution.css";
+import { useState } from "react";
 
 function ModalSolution({ data, onClose, index }) {
     const eValue = data.find(item => item.name === "E")?.value || 0;
@@ -7,6 +8,7 @@ function ModalSolution({ data, onClose, index }) {
         [`A${i + 1}`]: data.find(item => item.name === `A${i + 1}`)?.value || 0,
         [`l${i + 1}`]: data.find(item => item.name === `l${i + 1}`)?.value || 0,
     }));
+    const [visibleSolutionButton, setVisibleSolutionButton] = useState(false);
     
     return (
         <div className="modal-solution">
