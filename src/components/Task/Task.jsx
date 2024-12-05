@@ -2,11 +2,13 @@ import React, { useState, useRef } from "react";
 import Draggable from "react-draggable";
 import './Task.css';
 import ModalInfoTask from "../ModalInfoTask/ModalInfoTask";
+import ArrowRight from '../../img/Arrow-right.svg';
+import ArrowLeft from '../../img/Arrow-left.svg';
 import Arrow from '../../img/Arrow.svg';
 import ModalSolution from "../ModalSolution/ModalSolution";
 import ForceModal from "../ForceModal/ForceModal";
 
-function Task({handleSolve, collectInputData, taskData}) {
+function Task({ handleSolve, collectInputData, taskData }) {
     const [shapes, setShapes] = useState([]);
     const [isSupportModalOpen, setSupportModalOpen] = useState(false);
     const [supportPosition, setSupportPosition] = useState(null);
@@ -78,22 +80,40 @@ function Task({handleSolve, collectInputData, taskData}) {
             setSelectedFigureId(id);
         }
     };
-    
+
     const handlePositionSelect = (position) => {
+        const isLeft = position === "left"; // Проверяем, что выбрана позиция "left"
         setArrows((prevArrows) => ({
             ...prevArrows,
-            [selectedFigureId]: [...(prevArrows[selectedFigureId] || []), position], // Добавляем новую стрелочку к выбранной фигуре
+            [selectedFigureId]: [
+                ...(prevArrows[selectedFigureId] || []),
+                {
+                    position,
+                    direction: isLeft ? "left" : "right", // Если позиция "left", направление "left"
+                    image: isLeft ? ArrowLeft : ArrowRight, // Используем правильное изображение
+                    index: forceIndex // Индекс силы
+                },
+            ],
         }));
 
-        // Увеличиваем глобальный счётчик для следующей силы
-        setForceIndex(prevIndex => prevIndex + 1);
-
+        // Увеличиваем счётчик силы
+        setForceIndex((prevIndex) => prevIndex + 1);
         setForceWait(false);
-        setForceModalOpen(false);
     };
 
-    const handleDirectionSelect = () => {
-        
+    const handleDirectionSelect = (direction) => {
+        setArrows((prevArrows) => ({
+            ...prevArrows,
+            [selectedFigureId]: prevArrows[selectedFigureId].map((arrow, idx) =>
+                idx === prevArrows[selectedFigureId].length - 1 // Последняя стрелка
+                    ? {
+                        ...arrow,
+                        direction,
+                        image: direction === "left" ? ArrowLeft : ArrowRight
+                    }
+                    : arrow
+            ),
+        }));
     };
 
     const getArrowPositionStyle = (position) => {
@@ -145,67 +165,118 @@ function Task({handleSolve, collectInputData, taskData}) {
                                         }}
                                         onClick={() => handleClickWaitForces(shape.id)} // Передача id
                                     >
-                                        {arrows[shape.id]?.map((position, forceIndex) => (
+                                        {arrows[shape.id]?.map((arrow, idx) => (
                                             <div
-                                                key={forceIndex}
-                                                className="arrow"
+                                                key={idx}
                                                 style={{
                                                     position: 'absolute',
-                                                    ...getArrowPositionStyle(position),
+                                                    ...getArrowPositionStyle(arrow.position), // Позиция стрелки (left, center, right)
                                                 }}
                                             >
-                                                <span className='force__span'>F{forceIndex}</span>
-                                                <img className='arrow-force-image' src={Arrow} alt="arrow" />
+                                                <span className="force__span">F{arrow.index}</span>
+                                                <img
+                                                    src={arrow.image}
+                                                    className={arrow.direction}
+                                                    alt={`Arrow ${arrow.direction}`}
+                                                />
+                                                {arrow.position === 'center' ? (
+                                                    <>
+                                                        {shape.type === 'square' ? (
+                                                            <>
+                                                              <div
+                                                                    className="section-line"
+                                                                    style={{
+                                                                        height: "75%", // Линия для квадрата
+                                                                    }}
+                                                                />
+                                                                <img className="arrow-image" src={Arrow} style={{
+                                                                    width: '6.3rem',
+                                                                    transform: 'rotate(180deg)',
+                                                                }}></img>
+                                                                <img className="arrow-image" src={Arrow} style={{
+                                                                    width: '6.3rem',
+                                                                }}></img>  
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                            <div
+                                                                className="section-line"
+                                                                style={{
+                                                                    height: "1220%", // Увеличенная линия для прямоугольника
+                                                                    right: '50%',
+                                                                    top: '45%',
+                                                                }}
+                                                            />
+                                                            <div className="section-line__arrow-text" style={{ bottom: '-150%' }}>
+                                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
+                                                            </div>
+                                                            <div className="section-line__arrow" style={{
+                                                                top: '1220%',
+                                                                left: '-5.8rem',
+                                                            }}>
+                                                                <img className="arrow-image" src={Arrow} style={{
+                                                                    width: '7.5rem',
+                                                                }}></img>
+                                                                <img className="arrow-image" src={Arrow} style={{
+                                                                    width: '7.5rem',
+                                                                    transform: 'rotate(180deg)',
+                                                                }}></img>
+                                                            </div>
+                                                        </> 
+                                                        )}
+                                                    </>
+                                                ) : ''}
                                             </div>
                                         ))}
+
                                         <div className={`${shape.type}__label`}>Площадь: A{index} cм²</div>
                                         <div className="axis-line axis-line--horizontal" />
                                         {/* Линии вниз от двух углов фигуры */}
                                         {shape.type === "square" ? (
                                             <>
-                                            <div
-                                                className="section-line"
-                                                style={{
-                                                    height: "75%", // Линия для квадрата
-                                                }}
-                                            />
-                                            <div className="section-line__arrow-text" style={{bottom: '-70%'}}>
-                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
-                                            </div>
-                                            <div className="section-line__arrow" style={{
-                                                bottom: '-78%',
-                                            }}>
-                                                <img className="arrow-image" src={Arrow} style={{
-                                                    width: '6.3rem',
-                                                    transform: 'rotate(180deg)',
-                                                }}></img>
-                                                <img className="arrow-image" src={Arrow} style={{
-                                                    width: '6.3rem',
-                                                }}></img>
-                                            </div>
+                                                <div
+                                                    className="section-line"
+                                                    style={{
+                                                        height: "75%", // Линия для квадрата
+                                                    }}
+                                                />
+                                                <div className="section-line__arrow-text" style={{ bottom: '-70%' }}>
+                                                    <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
+                                                </div>
+                                                <div className="section-line__arrow" style={{
+                                                    bottom: '-78%',
+                                                }}>
+                                                    <img className="arrow-image" src={Arrow} style={{
+                                                        width: '6.3rem',
+                                                        transform: 'rotate(180deg)',
+                                                    }}></img>
+                                                    <img className="arrow-image" src={Arrow} style={{
+                                                        width: '6.3rem',
+                                                    }}></img>
+                                                </div>
                                             </>
                                         ) : (
                                             <>
-                                            <div
-                                                className="section-line"
-                                                style={{
-                                                    height: "160%", // Увеличенная линия для прямоугольника
-                                                }}
-                                            />
-                                            <div className="section-line__arrow-text" style={{bottom: '-150%'}}>
-                                                <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
-                                            </div>
-                                            <div className="section-line__arrow" style={{
-                                                bottom: '-165%',
-                                            }}>
-                                                <img className="arrow-image" src={Arrow} style={{
-                                                    width: '7.5rem',
-                                                    transform: 'rotate(180deg)',
-                                                }}></img>
-                                                <img className="arrow-image" src={Arrow} style={{
-                                                    width: '7.5rem',
-                                                }}></img>
-                                            </div>
+                                                <div
+                                                    className="section-line"
+                                                    style={{
+                                                        height: "160%", // Увеличенная линия для прямоугольника
+                                                    }}
+                                                />
+                                                <div className="section-line__arrow-text" style={{ bottom: '-150%' }}>
+                                                    <span className="length__span"><span className="length__span--ff">l</span>{index} м</span>
+                                                </div>
+                                                <div className="section-line__arrow" style={{
+                                                    bottom: '-165%',
+                                                }}>
+                                                    <img className="arrow-image" src={Arrow} style={{
+                                                        width: '7.5rem',
+                                                        transform: 'rotate(180deg)',
+                                                    }}></img>
+                                                    <img className="arrow-image" src={Arrow} style={{
+                                                        width: '7.5rem',
+                                                    }}></img>
+                                                </div>
                                             </>
                                         )}
                                     </div>
@@ -235,7 +306,7 @@ function Task({handleSolve, collectInputData, taskData}) {
                 <ModalInfoTask
                     shapes={shapes}
                     onClose={() => setModalInfoOpen(false)}
-                    openSolution = {() => {
+                    openSolution={() => {
                         setModalInfoOpen(false);
                         setSolutionModalOpen(true);
                         handleSolve();
